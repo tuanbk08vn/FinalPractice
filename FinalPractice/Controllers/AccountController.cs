@@ -8,7 +8,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using FinalPractice.Models;
+using FinalPractice.ViewModels;
 
 namespace FinalPractice.Controllers
 {
@@ -18,6 +18,8 @@ namespace FinalPractice.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+
+       
         public AccountController()
         {
         }

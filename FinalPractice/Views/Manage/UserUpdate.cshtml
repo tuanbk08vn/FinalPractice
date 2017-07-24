@@ -1,0 +1,112 @@
+﻿@model FinalPractice.ViewModels.UserUpdateViewModel
+
+@{
+    ViewBag.Title = "User Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>User Update</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.User.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-offset-2 col-md-10">
+                @Html.EditorFor(m => m.User.FirstName, new { htmlAttributes = new { @class = "form-control" } }))
+                @Html.ValidationMessageFor(m => m.User.FirstName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(m => m.User.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-offset-2 col-md-10">
+                @Html.EditorFor(m => m.User.LastName, new { htmlAttributes = new { @class = "form-control" } }))
+                @Html.ValidationMessageFor(m => m.User.LastName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(m => m.User.Address1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-offset-2 col-md-10">
+                @Html.EditorFor(m => m.User.Address1, new { htmlAttributes = new { @class = "form-control" } }))
+                @Html.ValidationMessageFor(m => m.User.Address1, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(m => m.User.Address2, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-offset-2 col-md-10">
+                @Html.EditorFor(m => m.User.Address2, new { htmlAttributes = new { @class = "form-control" } }))
+                @Html.ValidationMessageFor(m => m.User.Address2, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(m => m.User.City, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-offset-2 col-md-10">
+                @Html.EditorFor(m => m.User.City, new { htmlAttributes = new { @class = "form-control" } }))
+                @Html.ValidationMessageFor(m => m.User.City, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(m => m.User.State, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-offset-2 col-md-10">
+                @Html.EditorFor(m => m.User.State, new { htmlAttributes = new { @class = "form-control" } }))
+                @Html.ValidationMessageFor(m => m.User.State, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(m => m.User.Country, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-offset-2 col-md-10">
+                @Html.EditorFor(m => m.User.Country, new SelectList(), "Select MemberShip Type", new { @class = "form-control" })new { htmlAttributes = new { @class = "form-control" } }))
+                @Html.ValidationMessageFor(m => m.User.Country, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(m => m.User.Logo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-offset-2 col-md-10">
+                @Html.EditorFor(m => m.User.Logo, new { htmlAttributes = new { @class = "form-control" } }))
+                @Html.ValidationMessageFor(m => m.User.Logo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(m => m.User.DOB, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-offset-2 col-md-10">
+                @Html.EditorFor(m => m.User.DOB, new { htmlAttributes = new { @class = "form-control" } }))
+                @Html.ValidationMessageFor(m => m.User.DOB, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(m => m.User.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-offset-2 col-md-10">
+                @Html.EditorFor(m => m.User.FirstName, new { htmlAttributes = new { @class = "form-control" } }))
+                @Html.ValidationMessageFor(m => m.User.FirstName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

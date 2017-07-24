@@ -7,13 +7,13 @@ namespace FinalPractice.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class UserAdding : IMigrationMetadata
+    public sealed partial class InitialModel : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(UserAdding));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialModel));
         
         string IMigrationMetadata.Id
         {
-            get { return "201707240409524_UserAdding"; }
+            get { return "201707240437060_InitialModel"; }
         }
         
         string IMigrationMetadata.Source
