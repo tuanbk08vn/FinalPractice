@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using DomainLayer.Models;
 
 namespace FinalPractice.ViewModels
 {
@@ -20,13 +19,13 @@ namespace FinalPractice.ViewModels
         [Display(Name = "Category")]
         public int CategoryId { get; set; }
 
-        public Category Category { get; set; }
+        public CategoryViewModel Category { get; set; }
 
         [Required]
         [Display(Name = "Sub Category")]
         public int SubCategoryId { get; set; }
 
-        public SubCategory SubCategory { get; set; }
+        public SubCategoryViewModel SubCategory { get; set; }
 
         [Required]
         public string Thumbnail { get; set; }

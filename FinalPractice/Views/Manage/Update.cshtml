@@ -1,0 +1,99 @@
+﻿@using System.Web.UI.WebControls
+@model FinalPractice.ViewModels.UserProfileViewModel
+
+@{
+    ViewBag.Title = "Update Profile";
+}
+
+<h2>Update Profile</h2>
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
+{
+    @Html.AntiForgeryToken()
+    <hr/>
+    @Html.ValidationSummary("", new {@class = "text-danger"})
+    <div class="form-group">
+        @Html.LabelFor(m => m.FirstName, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.FirstName, new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.FirstName)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.LastName, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.LastName, new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.LastName)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Email, new {@class = "form-control"})
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Address1, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Address1, new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.Address1)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Address2, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Address2, new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.Address2)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Country, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.DropDownList("CountryList", new SelectList(ViewBag.CountryList), new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Country)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.State, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.State, new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.State)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.City, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.City, new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.City)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Logo, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Logo, new {@class = "form-control", type = "file", id = "upload-logo"})
+            <img src="" alt="Logo" height="200px" width="400px" id="thumbnail-upload-logo"/>
+            @Html.ValidationMessageFor(m => m.Logo)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.DOB, new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @*@Html.EditorFor(m => m.DOB, new {htmlAttributes = new { @class = "form-control" }})*@
+            @if (Model.DOB != null)
+            {
+                @Html.TextBoxFor(m => m.DOB, Model.DOB.GetValueOrDefault().ToString("yyyy-MM-dd"), new {type = "date", @class = "form-control"})
+                @Html.ValidationMessageFor(m => m.DOB)
+            }
+
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-warning" value="Register"/>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/App/UploadLogo.js")
+}

@@ -1,4 +1,5 @@
-﻿using FinalPractice.ViewModels;
+﻿using FinalPractice.UserModel;
+using FinalPractice.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -12,40 +13,54 @@ namespace FinalPractice.Controllers
     [Authorize]
     public class ManageController : Controller
     {
+        private readonly ApplicationDbContext _dbContext;
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
         public ManageController()
         {
+            _dbContext = new ApplicationDbContext();
         }
 
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ApplicationDbContext dbContext)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            _dbContext = dbContext;
         }
 
-        public ActionResult DisplayEditing()
+        public ActionResult Update()
         {
-            //List<Country> countries = new List<Country>()
-            //{
-            //    new Country() {Name = "India"},
-            //    new Country() {Name = "Pakistan"},
-            //    new Country() {Name = "Australia"},
-            //    new Country() {Name = "South Africa"},
-            //    new Country() {Name = "South Africa"},
-            //    new Country() {Name = "South Africa"},
-            //    new Country() {Name = "South Africa"},
-            //    new Country() {Name = "South Africa"},
 
-            //};
-            //var user = new UserUpdateViewModel
-            //{
-            //    User = new ApplicationUser(),
-            //    Countries = countries
-            //};
-            //return View("UserUpdate", user);
-            return View();
+            ////List<string> CountryList = new List<string>();
+            ////CultureInfo[] CInfoList = CultureInfo.GetCultures(CultureTypes.SpecificCultures);
+            ////foreach (CultureInfo CInfo in CInfoList)
+            ////{
+            ////    RegionInfo R = new RegionInfo(CInfo.LCID);
+            ////    if (!(CountryList.Contains(R.EnglishName)))
+            ////    {
+            ////        CountryList.Add(R.EnglishName);
+            ////    }
+            ////}
+
+            //CountryList.Sort();
+            //ViewBag.CountryList = CountryList;
+            var userId = User.Identity.GetUserId();
+            var currentUser = _dbContext.Users.FirstOrDefault(m => m.Id == userId);
+            var user = new UserProfileViewModel
+            {
+                FirstName = currentUser.FirstName,
+                LastName = currentUser.LastName,
+                Email = currentUser.Email,
+                Address1 = currentUser.Address1,
+                Address2 = currentUser.Address2,
+                City = currentUser.City,
+                State = currentUser.State,
+                Country = currentUser.Country,
+                Logo = currentUser.Logo,
+                DOB = currentUser.DOB
+            };
+            return View(user);
         }
 
         public ApplicationSignInManager SignInManager
@@ -359,7 +374,6 @@ namespace FinalPractice.Controllers
 
             base.Dispose(disposing);
         }
-
 
 
         #region Helpers

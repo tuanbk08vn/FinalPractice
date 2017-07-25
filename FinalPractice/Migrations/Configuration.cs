@@ -5,14 +5,14 @@ namespace FinalPractice.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<FinalPractice.DAL.MyContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<FinalPractice.UserModel.ApplicationDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(FinalPractice.DAL.MyContext context)
+        protected override void Seed(FinalPractice.UserModel.ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

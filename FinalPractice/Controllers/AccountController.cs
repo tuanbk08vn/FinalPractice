@@ -1,14 +1,14 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
+﻿using FinalPractice.UserModel;
+using FinalPractice.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using FinalPractice.ViewModels;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 
 namespace FinalPractice.Controllers
 {
@@ -19,12 +19,12 @@ namespace FinalPractice.Controllers
         private ApplicationUserManager _userManager;
 
 
-       
+
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -36,9 +36,9 @@ namespace FinalPractice.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -122,7 +122,7 @@ namespace FinalPractice.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -136,11 +136,47 @@ namespace FinalPractice.Controllers
             }
         }
 
+        // GetCountries() method
+        //static IEnumerable<Country> GetCountries()
+        //{
+        //    return CultureInfo.GetCultures(CultureTypes.SpecificCultures)
+        //        .Select(x => new Country
+        //        {
+        //            ID = new RegionInfo(x.LCID).Name,
+        //            Name = new RegionInfo(x.LCID).EnglishName
+        //        })
+        //        .GroupBy(c => c.ID)
+        //        .Select(c => c.First())
+        //        .OrderBy(x => x.Name);
+        //}
         //
         // GET: /Account/Register
+        public void GetCountries()
+        {
+            List<string> CountryList = new List<string>();
+            CultureInfo[] CInfoList = CultureInfo.GetCultures(CultureTypes.SpecificCultures);
+            foreach (CultureInfo CInfo in CInfoList)
+            {
+                RegionInfo R = new RegionInfo(CInfo.LCID);
+                if (!(CountryList.Contains(R.EnglishName)))
+                {
+                    CountryList.Add(R.EnglishName);
+                }
+            }
+
+            CountryList.Sort();
+
+            ViewBag.CountryList = CountryList.Select(m => new SelectListItem()
+            {
+                Text = m,
+                Value = m
+            });
+        }
+
         [AllowAnonymous]
         public ActionResult Register()
         {
+            GetCountries();
             return View();
         }
 
@@ -153,12 +189,25 @@ namespace FinalPractice.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Address1 = model.Address1,
+                    Address2 = model.Address2,
+                    City = model.City,
+                    State = model.State,
+                    Country = model.Country,
+                    Logo = model.Logo,
+                    DOB = model.DOB
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -169,7 +218,7 @@ namespace FinalPractice.Controllers
                 }
                 AddErrors(result);
             }
-
+            GetCountries();
             // If we got this far, something failed, redisplay form
             return View(model);
         }

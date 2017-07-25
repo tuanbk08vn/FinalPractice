@@ -1,15 +1,13 @@
-﻿using DomainLayer.Models;
-using Infracstructure.DAL;
-using System.Collections.Generic;
+﻿using FinalPractice.UserModel;
 
 namespace FinalPractice.ViewModels
 {
-    public class UserUpdateViewModel
+    public class UserRegisterViewModel
     {
         //public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         //{
         //    // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
-        //    Mapper.Map<ApplicationUser, UserUpdateViewModel>(this);
+        //    Mapper.Map<ApplicationUser, UserRegisterViewModel>(this);
         //    var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
         //    // Add custom user claims here
         //    return userIdentity;
@@ -17,7 +15,7 @@ namespace FinalPractice.ViewModels
 
         public ApplicationUser User { get; set; }
 
-        public List<Country> Countries { get; set; }
+        //public List<Country> Countries { get; set; }
         //public string FirstName { get; set; }
 
         //public string LastName { get; set; }

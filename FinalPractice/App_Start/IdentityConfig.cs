@@ -6,6 +6,7 @@ using Microsoft.Owin.Security;
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using FinalPractice.UserModel;
 
 namespace FinalPractice
 {
@@ -38,7 +39,7 @@ namespace FinalPractice
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
             //var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
-            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<MyContext>()));
+            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
             {

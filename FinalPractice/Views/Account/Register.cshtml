@@ -1,4 +1,5 @@
-﻿@model FinalPractice.ViewModels.RegisterViewModel
+﻿@using System.Net.Mime
+@model FinalPractice.ViewModels.RegisterViewModel
 @{
     ViewBag.Title = "Register";
 }
@@ -12,30 +13,103 @@
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
+        @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @Value = "Tuan", placeholder = "Tuan" })
+            @Html.ValidationMessageFor(m => m.FirstName)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @Value = "Pham", placeholder = "Pham" })
+            @Html.ValidationMessageFor(m => m.LastName)
+        </div>
+    </div>
+    <div class="form-group">
         @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @Value = "tuanbk@gmail.com", placeholder = "tuanbk@gmail.com" })
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @Value = "Test!2345", placeholder = "Test!2345" })
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @Value = "Test!2345", placeholder = "Test!2345" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Address1, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Address1, new { @class = "form-control", @Value = "60 Nguyen Van Thu", placeholder = "60 Nguyen Van Thu" })
+            @Html.ValidationMessageFor(m => m.Address1)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Address2, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Address2, new { @class = "form-control", @Value = "61 Nguyen Van Thu", placeholder = "61 Nguyen Van Thu" })
+            @Html.ValidationMessageFor(m => m.Address2)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Country, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @*@Html.DropDownListFor(m => m.Countries, new SelectList(Model.Countries.Select(m => new SelectListItem { Value = m.ID, Text = m.Name.ToString() })), "--Please Choose Your Country--", new { @class = "form-control" })*@
+            @Html.DropDownListFor(m => m.Country,new SelectList(ViewBag.CountryList, "Value", "Text"),new {@class = "form-control" })
+            @*@Html.DropDownListFor(m => m.Countries,
+                        new SelectList(Model.Countries.Select(m => new SelectListItem
+                        {
+                            Value = m.ID.ToString(),
+                            Text = m.Name
+                        }),
+                        new { @class = "form-control" }))
+                @Html.ValidationMessageFor(m => m.Countries)*@
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.State, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.State, new { @class = "form-control", @Value = "California", placeholder = "California" })
+            @Html.ValidationMessageFor(m => m.State)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.City, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.City, new { @class = "form-control", @Value = "LosAngeles", placeholder = "LosAngeles" })
+            @Html.ValidationMessageFor(m => m.City)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Logo, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Logo, new { @class = "form-control", type = "file", id = "upload-logo" })
+            <img src="" alt="Logo" height="200px" width="400px" id="thumbnail-upload-logo" />
+            @Html.ValidationMessageFor(m => m.Logo)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.DOB, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.DOB, new { htmlAttributes = new { @class = "form-control", @Value = "1980-10-26" } })
+            @Html.ValidationMessageFor(m => m.DOB)
         </div>
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
+            <input type="submit" class="btn btn-warning" value="Register" />
         </div>
     </div>
 }
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/App/UploadLogo.js")
 }

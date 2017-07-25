@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace FinalPractice.ViewModels
@@ -62,6 +63,7 @@ namespace FinalPractice.ViewModels
         public bool RememberMe { get; set; }
     }
 
+    //TO DO
     public class RegisterViewModel
     {
         [Required]
@@ -77,8 +79,42 @@ namespace FinalPractice.ViewModels
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        public string FirstName { get; set; }
+
+        [Required]
+        public string LastName { get; set; }
+
+        [Required]
+        public string Address1 { get; set; }
+
+        [Required]
+        public string Address2 { get; set; }
+
+        //[Required]
+        //public string City { get; set; }
+        public string Country { get; set; }
+
+        [Required]
+        public string City { get; set; }
+
+        [Required]
+        public string State { get; set; }
+
+        //[Required]
+        //public string Country { get; set; }
+
+        public string Logo { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true)]
+        public DateTime? DOB { get; set; }
+
+        //public List<int> WishListId { get; set; }
+
     }
 
     public class ResetPasswordViewModel
@@ -96,7 +132,7 @@ namespace FinalPractice.ViewModels
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }

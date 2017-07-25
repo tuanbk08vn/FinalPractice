@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
-using FinalPractice.DAL;
+using FinalPractice.UserModel;
 using FinalPractice.ViewModels;
-using Infracstructure.DAL;
 
 namespace FinalPractice
 {
@@ -9,8 +8,8 @@ namespace FinalPractice
     {
         public MappingProfile()
         {
-            CreateMap<ApplicationUser, UserUpdateViewModel>();
-            CreateMap<UserUpdateViewModel, ApplicationUser>();
+            CreateMap<ApplicationUser, RegisterViewModel>();
+            CreateMap<RegisterViewModel, ApplicationUser>();
         }
     }
 }

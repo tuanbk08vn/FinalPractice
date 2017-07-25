@@ -2,10 +2,11 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace Infracstructure.DAL
+namespace FinalPractice.UserModel
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
@@ -13,7 +14,11 @@ namespace Infracstructure.DAL
             : base("FinalPractice", throwIfV1Schema: false)
         {
         }
-
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            Database.SetInitializer<ApplicationDbContext>(null);
+            base.OnModelCreating(modelBuilder);
+        }
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
@@ -48,6 +53,7 @@ namespace Infracstructure.DAL
         public DateTime? DOB { get; set; }
 
         public List<int> WishListId { get; set; }
+
         //public List<Product> WishList { get; set; }
 
 
