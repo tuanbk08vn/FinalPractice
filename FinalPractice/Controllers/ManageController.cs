@@ -3,6 +3,9 @@ using FinalPractice.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -22,29 +25,38 @@ namespace FinalPractice.Controllers
             _dbContext = new ApplicationDbContext();
         }
 
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ApplicationDbContext dbContext)
+        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager,
+            ApplicationDbContext dbContext)
         {
             UserManager = userManager;
             SignInManager = signInManager;
             _dbContext = dbContext;
         }
 
+        public void GetCountries()
+        {
+            List<string> CountryList = new List<string>();
+            CultureInfo[] CInfoList = CultureInfo.GetCultures(CultureTypes.SpecificCultures);
+            foreach (CultureInfo CInfo in CInfoList)
+            {
+                RegionInfo R = new RegionInfo(CInfo.LCID);
+                if (!(CountryList.Contains(R.EnglishName)))
+                {
+                    CountryList.Add(R.EnglishName);
+                }
+            }
+
+            CountryList.Sort();
+
+            ViewBag.CountryList = CountryList.Select(m => new SelectListItem()
+            {
+                Text = m,
+                Value = m
+            });
+        }
+
         public ActionResult Update()
         {
-
-            ////List<string> CountryList = new List<string>();
-            ////CultureInfo[] CInfoList = CultureInfo.GetCultures(CultureTypes.SpecificCultures);
-            ////foreach (CultureInfo CInfo in CInfoList)
-            ////{
-            ////    RegionInfo R = new RegionInfo(CInfo.LCID);
-            ////    if (!(CountryList.Contains(R.EnglishName)))
-            ////    {
-            ////        CountryList.Add(R.EnglishName);
-            ////    }
-            ////}
-
-            //CountryList.Sort();
-            //ViewBag.CountryList = CountryList;
             var userId = User.Identity.GetUserId();
             var currentUser = _dbContext.Users.FirstOrDefault(m => m.Id == userId);
             var user = new UserProfileViewModel
@@ -60,9 +72,49 @@ namespace FinalPractice.Controllers
                 Logo = currentUser.Logo,
                 DOB = currentUser.DOB
             };
+            GetCountries();
             return View(user);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Update(UserProfileViewModel newProfile)
+        {
+            if (ModelState.IsValid && User.Identity.IsAuthenticated)
+            {
+                try
+                {
+                    var model = _dbContext.Users.FirstOrDefault(m => m.Email == newProfile.Email);
+                    model.UserName = newProfile.Email;
+                    model.Email = newProfile.Email;
+                    model.FirstName = newProfile.FirstName;
+                    model.LastName = newProfile.LastName;
+                    model.Address1 = newProfile.Address1;
+                    model.Address2 = newProfile.Address2;
+                    model.City = newProfile.City;
+                    model.State = newProfile.State;
+                    model.Country = newProfile.Country;
+                    model.Logo = newProfile.Logo;
+                    model.DOB = newProfile.DOB;
+
+                    _dbContext.SaveChanges();
+                    TempData["Notification"] = "Successfully";
+                    return RedirectToAction("Index", "Home");
+                }
+
+                catch (Exception e)
+                {
+                    TempData["Notification"] = "Something Wrong";
+                    return View("Update", newProfile);
+
+                }
+
+            }
+            GetCountries();
+            // If we got this far, something failed, redisplay form
+            TempData["Notification"] = "Something Wrong";
+            return View("Update", newProfile);
+        }
         public ApplicationSignInManager SignInManager
         {
             get { return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>(); }
@@ -374,7 +426,6 @@ namespace FinalPractice.Controllers
 
             base.Dispose(disposing);
         }
-
 
         #region Helpers
 

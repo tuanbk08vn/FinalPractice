@@ -213,10 +213,11 @@ namespace FinalPractice.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
+                    TempData["Notification"] = "Successfully!";
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
+                TempData["Notification"] = "Something Wrong";
             }
             GetCountries();
             // If we got this far, something failed, redisplay form
