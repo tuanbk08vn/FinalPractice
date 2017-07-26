@@ -4,16 +4,17 @@ using ServiceLayer.IService;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using Infracstructure.UnitOfWork;
 
 namespace ServiceLayer.Service
 {
-    class ProductService : IProductService
+    public class ProductService : IProductService
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public ProductService(IUnitOfWork unitOfWork)
+        public ProductService()
         {
-            _unitOfWork = unitOfWork;
+            _unitOfWork = new UnitOfWork();
         }
 
         public int AddProduct(Product product)
@@ -39,7 +40,8 @@ namespace ServiceLayer.Service
 
         public List<Product> ListProduct()
         {
-            return _unitOfWork.Product.Get();
+            var list = _unitOfWork.Product.Get();
+            return list;
 
         }
 

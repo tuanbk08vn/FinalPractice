@@ -304,6 +304,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataModel\DomainLayer.csproj">
+      <Project>{7A29001B-58F0-439B-8280-0C98958BCC18}</Project>
+      <Name>DomainLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ServiceLayer\ServiceLayer.csproj">
       <Project>{86f82e3f-46ad-45d6-ae28-11b02869627f}</Project>
       <Name>ServiceLayer</Name>

@@ -52,6 +52,10 @@
       <Project>{7a29001b-58f0-439b-8280-0c98958bcc18}</Project>
       <Name>DomainLayer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Infracstructure\Infracstructure.csproj">
+      <Project>{3ee226a8-73e4-4cce-a539-29545c808200}</Project>
+      <Name>Infracstructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

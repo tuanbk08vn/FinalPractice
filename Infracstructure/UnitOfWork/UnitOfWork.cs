@@ -5,7 +5,7 @@ using Infracstructure.Repository;
 
 namespace Infracstructure.UnitOfWork
 {
-    class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private readonly MyContext _dbContext;
 
@@ -13,11 +13,11 @@ namespace Infracstructure.UnitOfWork
 
         public IProductRepository Product { get; set; }
 
-        public UnitOfWork(MyContext dbContext)
+        public UnitOfWork()
         {
-            _dbContext = dbContext;
-            User = new UserRepository(dbContext);
-            Product = new ProductRepository(dbContext);
+            _dbContext = new MyContext();
+            User = new UserRepository(_dbContext);
+            Product = new ProductRepository(_dbContext);
         }
 
         public void Complete()
