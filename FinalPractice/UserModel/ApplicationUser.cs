@@ -11,7 +11,7 @@ namespace FinalPractice.UserModel
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("FinalPractice", throwIfV1Schema: false)
+            : base("FinalPractice")
         {
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

@@ -2,9 +2,11 @@
 {
     public interface IUserService
     {
-        void AddToWishList();
+        void AddToWishList(int userId);
         void LoadMore();
 
         void DeleteWishList();
+
+
     }
 }

@@ -12,7 +12,7 @@ namespace ServiceLayer.Service
             _unitOfWork = unitOfWork;
         }
 
-        public void AddToWishList()
+        public void AddToWishList(int userId)
         {
 
         }

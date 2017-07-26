@@ -1,4 +1,4 @@
-﻿    @using System.Net.Mime
+﻿@using System.Net.Mime
 @model FinalPractice.ViewModels.RegisterViewModel
 @{
     ViewBag.Title = "Register";
@@ -62,7 +62,7 @@
         @Html.LabelFor(m => m.Country, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @*@Html.DropDownListFor(m => m.Countries, new SelectList(Model.Countries.Select(m => new SelectListItem { Value = m.ID, Text = m.Name.ToString() })), "--Please Choose Your Country--", new { @class = "form-control" })*@
-            @Html.DropDownListFor(m => m.Country,new SelectList(ViewBag.CountryList, "Value", "Text"),new {@class = "form-control" })
+            @Html.DropDownListFor(m => m.Country, new SelectList(ViewBag.CountryList, "Value", "Text"), new { @class = "form-control" })
             @*@Html.DropDownListFor(m => m.Countries,
                         new SelectList(Model.Countries.Select(m => new SelectListItem
                         {

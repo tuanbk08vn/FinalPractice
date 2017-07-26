@@ -1,11 +1,25 @@
-﻿namespace ServiceLayer.IService
+﻿using DomainLayer.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+
+namespace ServiceLayer.IService
 {
     public interface IProductService
     {
-        void AddProduct();
+        int AddProduct(Product product);
 
-        void UpdateProduct();
+        void UpdateProduct(int id);
 
-        void DeleteProduct();
+        void DeleteProduct(int id);
+        List<Product> ListProduct();
+
+
+        List<Product> SearchProduct(Expression<Func<Product, bool>> filter);
+
+
+        Product DetailsProduct(int id);
+
+
     }
 }

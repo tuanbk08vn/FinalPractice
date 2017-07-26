@@ -1,18 +1,16 @@
-using Infracstructure.DAL;
-using System.Data.Entity.Migrations;
-
-namespace FinalPractice.Migrations
+namespace Infracstructure.Migrations
 {
+    using System.Data.Entity.Migrations;
 
-
-    internal sealed class Configuration : DbMigrationsConfiguration<MyContext>
+    internal sealed class ConfigurationB : DbMigrationsConfiguration<Infracstructure.DAL.MyContext>
     {
-        public Configuration()
+        public ConfigurationB()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
-        protected override void Seed(MyContext context)
+        protected override void Seed(Infracstructure.DAL.MyContext context)
         {
             //  This method will be called after migrating to the latest version.
 

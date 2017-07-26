@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IRepository\IProductRepository.cs" />
     <Compile Include="IRepository\IRepository.cs" />
     <Compile Include="IRepository\IUserRepository.cs" />
     <Compile Include="IUnitOfWork\IUnitOfWork.cs" />
@@ -47,6 +48,7 @@
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\SubCategory.cs" />
+    <Compile Include="Models\WishList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
