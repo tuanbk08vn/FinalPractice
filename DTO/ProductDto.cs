@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace DomainLayer.Models
+namespace DTO
 {
-    public class Product
+    public class ProductDto
     {
         public int? Id { get; set; }
 

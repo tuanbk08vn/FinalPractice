@@ -1,10 +1,13 @@
-﻿using DomainLayer.IUnitOfWork;
+﻿using AutoMapper;
+using DomainLayer.IUnitOfWork;
 using DomainLayer.Models;
+using DTO;
+using Infracstructure.UnitOfWork;
 using ServiceLayer.IService;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
-using Infracstructure.UnitOfWork;
 
 namespace ServiceLayer.Service
 {
@@ -17,43 +20,120 @@ namespace ServiceLayer.Service
             _unitOfWork = new UnitOfWork();
         }
 
-        public int AddProduct(Product product)
+        public ProductDto AddProduct(Product product)
         {
-
-            _unitOfWork.Product.Insert(product);
-            _unitOfWork.Complete();
-            return product.Id.GetValueOrDefault();
+            try
+            {
+                _unitOfWork.Product.Insert(product);
+                _unitOfWork.Complete();
+                var productDto = Mapper.Map<Product, ProductDto>(product);
+                return productDto;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
         }
 
 
-        public void UpdateProduct(int id)
+        public bool UpdateProduct(int id)
         {
-            _unitOfWork.Product.Update(id);
-            _unitOfWork.Complete();
+            try
+            {
+                _unitOfWork.Product.Update(id);
+                _unitOfWork.Complete();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+
         }
 
-        public void DeleteProduct(int id)
+        public bool DeleteProduct(int id)
         {
-            _unitOfWork.Product.Delete(id);
-            _unitOfWork.Complete();
+            try
+            {
+                _unitOfWork.Product.Delete(id);
+                _unitOfWork.Complete();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
         }
 
-        public List<Product> ListProduct()
+        public List<ProductDto> ListProduct()
         {
-            var list = _unitOfWork.Product.Get();
-            return list;
 
+            try
+            {
+                var test = _unitOfWork.Product.Get().ToList();
+ 
+                var list = Mapper.Map<List<ProductDto>>(test);
+                return list;
+
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
         }
 
         public List<Product> SearchProduct(Expression<Func<Product, bool>> filter)
         {
-            return _unitOfWork.Product.SearchProducts(filter);
+            try
+            {
+                return _unitOfWork.Product.SearchProducts(filter);
+
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
         }
 
         public Product DetailsProduct(int id)
         {
-            return _unitOfWork.Product.SelectOne(id);
+            try
+            {
+                return _unitOfWork.Product.SelectOne(id);
+
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            finally
+            {
+                _unitOfWork.Dispose();
+            }
+
         }
 
+       
     }
+    
 }

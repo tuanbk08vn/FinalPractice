@@ -224,6 +224,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ProductFormViewModel.cs" />
+    <Compile Include="ViewModels\ProductInsertViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="ViewModels\SubCategoryViewModel.cs" />
     <Compile Include="ViewModels\UserProfileViewModel.cs" />
@@ -289,8 +290,10 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Manage\Update.cshtml" />
+    <Content Include="Views\Shared\_ListProducts.cshtml" />
+    <Content Include="Views\Shared\_InsertProduct.cshtml" />
+    <Content Include="Views\Products\Create.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
-    <Content Include="Views\Products\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -307,6 +310,10 @@
     <ProjectReference Include="..\DataModel\DomainLayer.csproj">
       <Project>{7A29001B-58F0-439B-8280-0C98958BCC18}</Project>
       <Name>DomainLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DTO\DTO.csproj">
+      <Project>{a10184a8-d806-4289-940a-47142a93d4f3}</Project>
+      <Name>DTO</Name>
     </ProjectReference>
     <ProjectReference Include="..\ServiceLayer\ServiceLayer.csproj">
       <Project>{86f82e3f-46ad-45d6-ae28-11b02869627f}</Project>

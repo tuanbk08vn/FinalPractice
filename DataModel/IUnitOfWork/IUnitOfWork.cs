@@ -8,6 +8,8 @@ namespace DomainLayer.IUnitOfWork
         IUserRepository User { get; }
 
         void Complete();
+        void Dispose(bool disposing);
+        void Dispose();
 
 
 

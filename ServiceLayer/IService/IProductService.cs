@@ -1,4 +1,5 @@
 ﻿using DomainLayer.Models;
+using DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -7,12 +8,12 @@ namespace ServiceLayer.IService
 {
     public interface IProductService
     {
-        int AddProduct(Product product);
+        ProductDto AddProduct(Product product);
 
-        void UpdateProduct(int id);
+        bool UpdateProduct(int id);
 
-        void DeleteProduct(int id);
-        List<Product> ListProduct();
+        bool DeleteProduct(int id);
+        List<ProductDto> ListProduct();
 
 
         List<Product> SearchProduct(Expression<Func<Product, bool>> filter);

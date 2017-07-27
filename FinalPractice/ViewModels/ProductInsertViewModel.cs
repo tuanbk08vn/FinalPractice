@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace FinalPractice.ViewModels
 {
-    public class ProductFormViewModel
+    public class ProductInsertViewModel : ProductViewModel
     {
         public int? Id { get; set; }
 

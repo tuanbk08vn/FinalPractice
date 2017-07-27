@@ -1,0 +1,50 @@
+﻿@model FinalPractice.ViewModels.ProductFormViewModel
+
+
+<table class="table container">
+
+    @foreach (var item in Model.ProductListViewModel)
+    {
+        <tr class="row">
+            <td class="col-md-1">
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td class="col-md-1">
+                @Html.DisplayFor(modelItem => item.CodeSKU)
+            </td>
+            <td class="col-md-1">
+                @Html.DisplayFor(modelItem => item.CategoryId)
+            </td>
+            <td class="col-md-1">
+                @Html.DisplayFor(modelItem => item.SubCategoryId)
+            </td>
+            <td class="col-md-1">
+                @Html.DisplayFor(modelItem => item.Thumbnail)
+            </td>
+            <td class="col-md-1">
+                @Html.DisplayFor(modelItem => item.MainPhoto)
+            </td>
+            <td class="col-md-1">
+                @Html.DisplayFor(modelItem => item.Summary)
+            </td>
+            <td class="col-md-1">
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td class="col-md-1">
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td class="col-md-1">
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td class="col-md-1">
+                @Html.DisplayFor(modelItem => item.Featured)
+            </td>
+            <td class="col-md-1">
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

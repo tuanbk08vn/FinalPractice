@@ -1,11 +1,10 @@
-﻿using DomainLayer.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace DomainLayer.IRepository
 {
     public interface IRepository<T>
     {
-        List<T> Get();
+        IEnumerable<T> Get();
         bool Insert(T product);
         bool Update(int id);
 

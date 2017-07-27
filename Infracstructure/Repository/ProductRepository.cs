@@ -23,10 +23,10 @@ namespace Infracstructure.Repository
             _dbContext = dbContext;
         }
 
-        public List<Product> Get()
+        public IEnumerable<Product> Get()
         {
 
-            return _dbContext.Products.ToList();
+            return _dbContext.Products;
         }
 
         public bool Insert(Product product)
