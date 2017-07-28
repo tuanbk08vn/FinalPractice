@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Linq.Expressions;
 
 namespace Infracstructure.Repository
 {
@@ -25,8 +24,7 @@ namespace Infracstructure.Repository
 
         public IEnumerable<Product> Get()
         {
-
-            return _dbContext.Products;
+            return _dbContext.Products.ToList();
         }
 
         public bool Insert(Product product)
@@ -40,23 +38,28 @@ namespace Infracstructure.Repository
             {
                 return false;
             }
-
         }
 
-        public bool Update(int productId)
+        public bool Update(Product product)
         {
             try
             {
-                var currentProduct = _dbContext.Products.Find(productId);
-                if (currentProduct != null)
-                    _dbContext.Products.AddOrUpdate(currentProduct);
-                return true;
+                //var currentProduct = _dbContext.Products.Find(productId);
+                var currentInDb = _dbContext.Products.Find(product.Id);
+
+                if (currentInDb != null)
+                {
+                    currentInDb = product;
+                    _dbContext.Products.AddOrUpdate(currentInDb);
+
+                    return true;
+                }
+                return false;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return false;
             }
-
         }
 
         public bool Delete(int productId)
@@ -73,23 +76,23 @@ namespace Infracstructure.Repository
             }
         }
 
-        public List<Product> SearchProducts(Expression<Func<Product, bool>> filter)
+        public List<Product> SearchProducts(int id)
         {
+            if (id <= 0) throw new ArgumentOutOfRangeException(nameof(id));
+
             try
             {
-                return _dbContext.Products.Where(filter).ToList();
+                return _dbContext.Products.Where(i => i.Id == id).ToList();
             }
             catch (Exception)
             {
                 return null;
             }
-
         }
 
         public Product SelectOne(int id)
         {
             return _dbContext.Products.FirstOrDefault(m => m.Id == id);
         }
-
     }
 }

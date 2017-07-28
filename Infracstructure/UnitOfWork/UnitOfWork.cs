@@ -15,12 +15,16 @@ namespace Infracstructure.UnitOfWork
         public IUserRepository User { get; set; }
 
         public IProductRepository Product { get; set; }
+        public ICategoryRepository Category { get; set; }
+        public ISubCategoryRepository SubCategory { get; set; }
 
         public UnitOfWork()
         {
             _dbContext = new MyContext();
             User = new UserRepository(_dbContext);
             Product = new ProductRepository(_dbContext);
+            Category = new CategoryRepository(_dbContext);
+            SubCategory = new SubCategoryRepository(_dbContext);
         }
 
         public void Complete()

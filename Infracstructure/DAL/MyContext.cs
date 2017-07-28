@@ -14,6 +14,7 @@ namespace Infracstructure.DAL
         {
             Database.SetInitializer<MyContext>(null);
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Product>().Property(x => x.Id).IsOptional();
         }
 
         public static MyContext Create()

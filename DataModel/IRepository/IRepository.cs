@@ -6,7 +6,7 @@ namespace DomainLayer.IRepository
     {
         IEnumerable<T> Get();
         bool Insert(T product);
-        bool Update(int id);
+        bool Update(T product);
 
         bool Delete(int id);
 

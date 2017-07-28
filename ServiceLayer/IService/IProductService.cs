@@ -8,15 +8,15 @@ namespace ServiceLayer.IService
 {
     public interface IProductService
     {
-        ProductDto AddProduct(Product product);
+        ProductDto AddProduct(ProductDto productDto);
 
-        bool UpdateProduct(int id);
+        bool UpdateProduct(ProductDto productDto);
 
         bool DeleteProduct(int id);
         List<ProductDto> ListProduct();
 
 
-        List<Product> SearchProduct(Expression<Func<Product, bool>> filter);
+        List<ProductDto> SearchProduct(int id);
 
 
         Product DetailsProduct(int id);

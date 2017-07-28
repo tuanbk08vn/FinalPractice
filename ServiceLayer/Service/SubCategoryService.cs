@@ -6,27 +6,28 @@ using Infracstructure.UnitOfWork;
 using ServiceLayer.IService;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ServiceLayer.Service
 {
-    public class ProductService : IProductService
+    public class SubCategoryService : ISubCategoryService
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public ProductService()
+        public SubCategoryService()
         {
             _unitOfWork = new UnitOfWork();
         }
 
-        public ProductDto AddProduct(ProductDto productDto)
+        public SubCategoryDto AddSubCategory(SubCategoryDto subCategoryDto)
         {
             try
             {
-                var product = Mapper.Map<Product>(productDto);
-                _unitOfWork.Product.Insert(product);
+                var subCategory = Mapper.Map<SubCategory>(subCategoryDto);
+                _unitOfWork.SubCategory.Insert(subCategory);
                 _unitOfWork.Complete();
 
-                return productDto;
+                return subCategoryDto;
             }
             catch (Exception)
             {
@@ -35,13 +36,13 @@ namespace ServiceLayer.Service
         }
 
 
-        public bool UpdateProduct(ProductDto productDto)
+        public bool UpdateSubCategory(SubCategoryDto subCategoryDto)
         {
             try
             {
-                var productNeedUpdate = Mapper.Map<Product>(productDto);
+                var subCategoryNeedUpdate = Mapper.Map<SubCategory>(subCategoryDto);
 
-                _unitOfWork.Product.Update(productNeedUpdate);
+                _unitOfWork.SubCategory.Update(subCategoryNeedUpdate);
                 _unitOfWork.Complete();
 
                 return true;
@@ -52,11 +53,11 @@ namespace ServiceLayer.Service
             }
         }
 
-        public bool DeleteProduct(int id)
+        public bool DeleteSubCategory(int id)
         {
             try
             {
-                _unitOfWork.Product.Delete(id);
+                _unitOfWork.SubCategory.Delete(id);
                 _unitOfWork.Complete();
                 return true;
             }
@@ -70,13 +71,13 @@ namespace ServiceLayer.Service
             }
         }
 
-        public List<ProductDto> ListProduct()
+        public List<SubCategoryDto> ListSubCategory()
         {
             try
             {
-                var listInDb = _unitOfWork.Product.Get();
+                var listInDb = _unitOfWork.SubCategory.Get().ToList();
 
-                var list = Mapper.Map<List<ProductDto>>(listInDb);
+                var list = Mapper.Map<List<SubCategoryDto>>(listInDb);
                 return list;
             }
             catch (Exception e)
@@ -85,25 +86,12 @@ namespace ServiceLayer.Service
             }
         }
 
-        public List<ProductDto> SearchProduct(int id)
-        {
-            try
-            {
-                var resultInDb = _unitOfWork.Product.SearchProducts(id);
-                var result = Mapper.Map<List<ProductDto>>(resultInDb);
-                return result;
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
-        }
 
-        public Product DetailsProduct(int id)
+        public SubCategory DetailsSubCategory(int id)
         {
             try
             {
-                return _unitOfWork.Product.SelectOne(id);
+                return _unitOfWork.SubCategory.SelectOne(id);
             }
             catch (Exception)
             {

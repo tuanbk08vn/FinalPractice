@@ -9,24 +9,24 @@ using System.Collections.Generic;
 
 namespace ServiceLayer.Service
 {
-    public class ProductService : IProductService
+    public class CategoryService : ICategoryService
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public ProductService()
+        public CategoryService()
         {
             _unitOfWork = new UnitOfWork();
         }
 
-        public ProductDto AddProduct(ProductDto productDto)
+        public CategoryDto AddCategory(CategoryDto categoryDto)
         {
             try
             {
-                var product = Mapper.Map<Product>(productDto);
-                _unitOfWork.Product.Insert(product);
+                var category = Mapper.Map<Category>(categoryDto);
+                _unitOfWork.Category.Insert(category);
                 _unitOfWork.Complete();
 
-                return productDto;
+                return categoryDto;
             }
             catch (Exception)
             {
@@ -35,13 +35,13 @@ namespace ServiceLayer.Service
         }
 
 
-        public bool UpdateProduct(ProductDto productDto)
+        public bool UpdateCategory(CategoryDto categoryDto)
         {
             try
             {
-                var productNeedUpdate = Mapper.Map<Product>(productDto);
+                var categoryNeedUpdate = Mapper.Map<Category>(categoryDto);
 
-                _unitOfWork.Product.Update(productNeedUpdate);
+                _unitOfWork.Category.Update(categoryNeedUpdate);
                 _unitOfWork.Complete();
 
                 return true;
@@ -52,11 +52,11 @@ namespace ServiceLayer.Service
             }
         }
 
-        public bool DeleteProduct(int id)
+        public bool DeleteCategory(int id)
         {
             try
             {
-                _unitOfWork.Product.Delete(id);
+                _unitOfWork.Category.Delete(id);
                 _unitOfWork.Complete();
                 return true;
             }
@@ -70,13 +70,13 @@ namespace ServiceLayer.Service
             }
         }
 
-        public List<ProductDto> ListProduct()
+        public List<CategoryDto> ListCategory()
         {
             try
             {
-                var listInDb = _unitOfWork.Product.Get();
+                var listInDb = _unitOfWork.Category.Get();
 
-                var list = Mapper.Map<List<ProductDto>>(listInDb);
+                var list = Mapper.Map<List<CategoryDto>>(listInDb);
                 return list;
             }
             catch (Exception e)
@@ -85,25 +85,12 @@ namespace ServiceLayer.Service
             }
         }
 
-        public List<ProductDto> SearchProduct(int id)
-        {
-            try
-            {
-                var resultInDb = _unitOfWork.Product.SearchProducts(id);
-                var result = Mapper.Map<List<ProductDto>>(resultInDb);
-                return result;
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
-        }
 
-        public Product DetailsProduct(int id)
+        public Category DetailsCategory(int id)
         {
             try
             {
-                return _unitOfWork.Product.SelectOne(id);
+                return _unitOfWork.Category.SelectOne(id);
             }
             catch (Exception)
             {

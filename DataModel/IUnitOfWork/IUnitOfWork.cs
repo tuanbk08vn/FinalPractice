@@ -6,7 +6,8 @@ namespace DomainLayer.IUnitOfWork
     {
         IProductRepository Product { get; }
         IUserRepository User { get; }
-
+        ICategoryRepository Category { get; }
+        ISubCategoryRepository SubCategory { get; }
         void Complete();
         void Dispose(bool disposing);
         void Dispose();

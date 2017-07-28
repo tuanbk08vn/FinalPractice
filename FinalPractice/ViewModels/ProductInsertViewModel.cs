@@ -5,7 +5,7 @@ namespace FinalPractice.ViewModels
 {
     public class ProductInsertViewModel : ProductViewModel
     {
-        public int? Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(255)]

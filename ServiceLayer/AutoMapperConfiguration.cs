@@ -6,26 +6,15 @@ namespace ServiceLayer
 {
     public static class AutoMapperConfiguration
     {
-        public static void Configure()
+        public static void MappingServiceLayer()
         {
-            Mapper.Initialize(x =>
-            {
-                x.AddProfile<MappingServiceLayer>();
-            });
-
-
+            Mapper.CreateMap<Product, ProductDto>()
+                .ForMember(x => x.Category, opt => opt.Ignore())
+                .ForMember(x => x.SubCategory, opt => opt.Ignore()).ReverseMap();
+            Mapper.CreateMap<Category, CategoryDto>().ReverseMap();
+            Mapper.CreateMap<SubCategory, SubCategoryDto>().ReverseMap();
 
         }
     }
 
-    public class MappingServiceLayer : Profile
-    {
-        public MappingServiceLayer()
-        {
-            CreateMap<Product, ProductDto>();
-            CreateMap<ProductDto, Product>();
-
-        }
-
-    }
 }
