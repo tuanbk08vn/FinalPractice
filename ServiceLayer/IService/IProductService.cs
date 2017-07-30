@@ -1,8 +1,5 @@
-﻿using DomainLayer.Models;
-using DTO;
-using System;
+﻿using DTO;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 
 namespace ServiceLayer.IService
 {
@@ -18,8 +15,9 @@ namespace ServiceLayer.IService
 
         List<ProductDto> SearchProduct(int id);
 
+        List<ProductDto> SearchProduct(string searchType, string input);
 
-        Product DetailsProduct(int id);
+        ProductDto DetailsProduct(int id);
 
 
     }

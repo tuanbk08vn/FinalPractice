@@ -36,7 +36,7 @@
             @Html.Label("Category",  new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @*@Html.EditorFor(model => model.CategoryId, new { htmlAttributes = new { @class = "form-control", @Value = "1", placeholder = "" } })*@
-                @Html.DropDownListFor(m => m.Product.CategoryId, new SelectList(Model.Categories, "Id", "Name"), "Select Category Type", new { @class = "form-control" })
+                @Html.DropDownListFor(m => m.Product.CategoryId, new SelectList(Model.Categories, "Id", "Name"), "---Select Category Type---", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Product.Id, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -44,7 +44,7 @@
         <div class="form-group">
             @Html.Label("Sub Category", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.Product.SubCategoryId, new SelectList(Model.SubCategories, "Id", "Name"), "Select Sub Category Type", new { @class = "form-control" })
+                @Html.DropDownListFor(m => m.Product.SubCategoryId, new SelectList(Model.SubCategories, "Id", "Name"), "---Select Sub Category Type---", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Product.Id, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -84,7 +84,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Product.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Product.StartDate, new { htmlAttributes = new { @class = "form-control", @Value = "2017-10-26"} })
+                @Html.TextBoxFor(model => model.Product.StartDate, "{0:dd-MMM-yyyy}", new { @class = "form-control date-picker" , placeholder="Click here to choose Start Date..."})
                 @Html.ValidationMessageFor(model => model.Product.StartDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -98,9 +98,9 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Product.Featured, htmlAttributes: new { @class = "control-label col-md-2", @Value = "Test........", placeholder = "Test....." })
+            @Html.LabelFor(model => model.Product.Featured, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Product.Featured, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Product.Featured, new { htmlAttributes = new { @class = "form-control", @Value = "This is featured....", placeholder = "This is featured...." } })
                 @Html.ValidationMessageFor(model => model.Product.Featured, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -119,4 +119,18 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <!-- jQuery UI CSS Reference -->
+    <link href="@Url.Content("~/Content/themes/base/jquery-ui.min.css")" rel="stylesheet" />
+    <!-- Required jQuery and jQuery UI Javascript references -->
+    <script src="@Url.Content("~/Scripts/jquery-1.12.4.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.12.1.min.js")"></script>
+    <!-- Code to wire up your DatePicker -->
+    <script type="text/javascript">
+        $(function() {
+            // This will make every element with the class "date-picker" into a DatePicker element
+            $('.date-picker').datepicker({
+                dateFormat: "dd-MM-yy"
+        });
+        })
+    </script>
 }

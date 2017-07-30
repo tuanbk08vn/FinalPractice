@@ -64,10 +64,6 @@ namespace ServiceLayer.Service
             {
                 return false;
             }
-            finally
-            {
-                _unitOfWork.Dispose();
-            }
         }
 
         public List<CategoryDto> ListCategory()
@@ -95,10 +91,6 @@ namespace ServiceLayer.Service
             catch (Exception)
             {
                 return null;
-            }
-            finally
-            {
-                _unitOfWork.Dispose();
             }
         }
     }

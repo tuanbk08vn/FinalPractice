@@ -7,10 +7,38 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<h2 style="color:red">@TempData["Notification"]</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-xs-12">
+            @Html.ActionLink("Create New", "Create")
+        </div>
+        <div class="col-md-6 col-xs-12">
+            @*@Html.Label("Search", new { @class = "control-label col-md-2" })
+                <div class="right-inner-addon">
+                    <i class="icon-search"></i>
+                    <input type="search" class="form-control" placeholder="Search" />
+                </div>
+                </div>*@
+            <form class="search-form" method="post" action="~/Products/Search">
+                <div class="btn-search-type">
+                    @Html.DropDownList("searchTypeInput", new List<SelectListItem>
+                    {
+                        new SelectListItem {Text = "---Type Search---", Value = "Name"},
+                        new SelectListItem {Text = "Name", Value = "Name"},
+                        new SelectListItem {Text = "Code SKU", Value = "CodeSKU"},
+                        new SelectListItem {Text = "Category", Value = "Category"},
+                        new SelectListItem {Text = "Sub Category", Value = "SubCategory"}
+                    }, new { @class = "form-control"})
+                </div>
+                <div class="right-inner-addon">
+                    <i class="glyphicon glyphicon-search"></i>
+                    <input class="form-control" placeholder="Search..." name="searchInput"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<h2 style="color: red">@TempData["Notification"]</h2>
 <table class="table">
     <tr>
         <th>
@@ -49,48 +77,49 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CodeSKU)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CategoryId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SubCategoryId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Thumbnail)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MainPhoto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Summary)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StartDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Featured)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            <button id="@item.Id" class="btn btn-dangerous btn-delete">Delete</button>
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CodeSKU)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubCategory.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Thumbnail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MainPhoto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Summary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Featured)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
+                @Html.ActionLink("Details", "Detail", new {id = item.Id}) |
+                <button id="@item.Id" class="btn btn-link btn-delete">Delete</button>
+            </td>
+        </tr>
+    }
 
 </table>
 

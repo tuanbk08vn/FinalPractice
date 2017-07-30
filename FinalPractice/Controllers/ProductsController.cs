@@ -31,7 +31,7 @@ namespace FinalPractice.Controllers
             {
                 var list = _productService.ListProduct();
                 var product = Mapper.Map<List<ProductViewModel>>(list) ?? new List<ProductViewModel>();
-
+                product.Reverse();
 
                 return View(product);
             }
@@ -77,6 +77,7 @@ namespace FinalPractice.Controllers
                 var list = _productService.ListProduct();
                 var viewModel = Mapper.Map<List<ProductViewModel>>(list) ?? new List<ProductViewModel>();
 
+                viewModel.Reverse();
                 return View("Index", viewModel);
             }
             catch (Exception e)
@@ -133,26 +134,75 @@ namespace FinalPractice.Controllers
         }
 
         [HttpPost]
-        public ActionResult Delete(int id)
+        public JsonResult Delete(int id)
         {
             if (!ModelState.IsValid)
             {
                 TempData["Notification"] = "Something Wrong";
-                return JavaScript("<script>alert(\"Something Wrong\")</script>");
+                //return JavaScript("<script>alert(\"Something Wrong\")</script>");
+                return Json(new { success = false, JsonRequestBehavior.AllowGet });
             }
 
             try
             {
                 _productService.DeleteProduct(id);
                 TempData["Notification"] = "Successfully!!!";
-                return JavaScript("<script>alert(\"Delete Successfully!!!\")</script>");
+                //return JavaScript("<script>alert(\"Delete Successfully!!!\")</script>");
+                return Json(new { success = true, JsonRequestBehavior.AllowGet });
             }
             catch (Exception e)
             {
                 TempData["Notification"] = "Something Wrong";
-                return JavaScript("<script>alert(\"Something Wrong\")</script>");
+                return Json(new { success = false, JsonRequestBehavior.AllowGet });
             }
+        }
 
+        //GET: Products/Detail/id
+        public ActionResult Detail(int id)
+        {
+            if (!ModelState.IsValid)
+                return View("Index");
+            try
+            {
+                var product = _productService.DetailsProduct(id);
+                var result = Mapper.Map<ProductViewModel>(product);
+                return View(result);
+            }
+            catch (Exception e)
+            {
+                TempData["Notification"] = "Product Not Found";
+                return View("Index");
+            }
+        }
+
+        //POST: Products/Search/{input}
+
+
+        [HttpPost]
+        public ActionResult Search(string searchTypeInput, string searchInput)
+        {
+            if (!ModelState.IsValid)
+                return View("Index");
+            try
+            {
+                var result = _productService.SearchProduct(searchTypeInput, searchInput);
+
+                if (result.Count == 0)
+                {
+                    TempData["Notification"] = "Results not found!!!";
+                }
+                else
+                {
+                    TempData["Notification"] = "Results found!!!";
+                }
+                var viewModel = Mapper.Map<List<ProductViewModel>>(result);
+                return View("Index", viewModel);
+            }
+            catch (Exception e)
+            {
+                TempData["Notification"] = "No result found!!!";
+                return View("Index");
+            }
         }
     }
 }

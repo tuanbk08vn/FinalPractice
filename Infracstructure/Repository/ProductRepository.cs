@@ -67,7 +67,10 @@ namespace Infracstructure.Repository
             try
             {
                 var product = _dbContext.Products.Find(productId);
-                if (product != null) _dbContext.Products.Remove(product);
+                if (product != null)
+                {
+                    _dbContext.Products.Remove(product);
+                }
                 return true;
             }
             catch (Exception)
@@ -78,18 +81,30 @@ namespace Infracstructure.Repository
 
         public List<Product> SearchProducts(int id)
         {
-            if (id <= 0) throw new ArgumentOutOfRangeException(nameof(id));
+            if (id < 0) throw new ArgumentOutOfRangeException(nameof(id));
 
             try
             {
                 return _dbContext.Products.Where(i => i.Id == id).ToList();
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return null;
             }
         }
 
+        public List<Product> SearchProducts(Func<Product, bool> lamda)
+        {
+            try
+            {
+                var result = _dbContext.Products.Where(lamda).ToList();
+                return result;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
         public Product SelectOne(int id)
         {
             return _dbContext.Products.FirstOrDefault(m => m.Id == id);

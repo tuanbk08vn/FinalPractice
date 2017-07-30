@@ -1,17 +1,18 @@
 ﻿$(document).ready(function () {
-    alert(0);
     $(".btn-delete").on('click', function() {
-        alert(1);
-        var id = $(this).attr('id');
-
+        var removeProduct = $(this).parents('tr');
         $.ajax({
-            method:'POST',
+            method: 'POST',
+            //url: '@Url.Action("Delete","Product", Request.Url.Scheme))',
+            url: 'Products/Delete',
             dataType: 'json',
-            url: "/Products/Delete",
-            data: { id: id },
-            success: function(response) {
+            data: { id: $(this).attr('id') },
+            success: function (response) {
                 alert("success");
-                $(this).parent('tr').remove();
+                removeProduct.remove();
+            },
+            error: function(response) {
+                alert("Not Success");
             }
 
         });

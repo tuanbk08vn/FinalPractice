@@ -73,9 +73,36 @@ namespace Infracstructure.Repository
             }
         }
 
+        public int GetByName(string name)
+        {
+            try
+            {
+                var resultInDb = _dbContext.SubCategories.FirstOrDefault(x => x.Name.ToLower().Contains(name));
+                if (resultInDb != null)
+                {
+                    var result = resultInDb.Id;
+                    return result;
+                }
+
+                return 0;
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
+        }
+
         public SubCategory SelectOne(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = _dbContext.SubCategories.FirstOrDefault(x => x.Id == id);
+                return result;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
     }
 }

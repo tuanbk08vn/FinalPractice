@@ -4,6 +4,7 @@ using Infracstructure.DAL;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
+using System.Linq;
 
 namespace Infracstructure.Repository
 {
@@ -72,9 +73,36 @@ namespace Infracstructure.Repository
             }
         }
 
+        public int GetByName(string name)
+        {
+            try
+            {
+                var resultInDb = _dbContext.Categories.FirstOrDefault(x => x.Name.ToLower().Contains(name));
+                if (resultInDb != null)
+                {
+                    var result = resultInDb.Id;
+                    return result;
+                }
+
+                return 0;
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
+        }
+
         public Category SelectOne(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = _dbContext.Categories.FirstOrDefault(x => x.Id == id);
+                return result;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
     }
 }

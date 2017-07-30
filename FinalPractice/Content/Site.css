@@ -4,6 +4,7 @@
 }
 
 /* Set padding to keep content from hitting the edges */
+
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
@@ -12,13 +13,35 @@
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
-.dl-horizontal dt {
-    white-space: normal;
-}
+
+.dl-horizontal dt { white-space: normal; }
 
 /* Set width on the form input elements since they're 100% wide by default */
+
 input,
 select,
-textarea {
-    max-width: 280px;
+textarea { max-width: 280px; }
+
+.no-padding { padding: 0 !important }
+
+.right-inner-addon { position: relative; }
+
+.right-inner-addon input {
+    padding-right: 10%;
+    max-width: none !important;
 }
+
+.right-inner-addon i {
+    position: absolute;
+    right: 2%;
+    top: 50%;
+    margin-top: -10px; /* half icon's height */
+    cursor: pointer
+}
+
+.btn-search-type {
+    width: 60% !important;
+    text-align-last: center;
+}
+
+.btn-search-type select { text-align: center !important;max-width: 50% !important}
