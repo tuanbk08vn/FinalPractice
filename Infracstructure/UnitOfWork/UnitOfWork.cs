@@ -17,6 +17,7 @@ namespace Infracstructure.UnitOfWork
         public IProductRepository Product { get; set; }
         public ICategoryRepository Category { get; set; }
         public ISubCategoryRepository SubCategory { get; set; }
+        public IWishListRepository WishList { get; set; }
 
         public UnitOfWork()
         {
@@ -25,6 +26,8 @@ namespace Infracstructure.UnitOfWork
             Product = new ProductRepository(_dbContext);
             Category = new CategoryRepository(_dbContext);
             SubCategory = new SubCategoryRepository(_dbContext);
+            WishList = new WishListRepository(_dbContext);
+
         }
 
         public void Complete()

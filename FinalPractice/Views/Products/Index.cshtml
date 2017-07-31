@@ -117,6 +117,7 @@
                 @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
                 @Html.ActionLink("Details", "Detail", new {id = item.Id}) |
                 <button id="@item.Id" class="btn btn-link btn-delete">Delete</button>
+                <button data-id="@item.Id" id="@(item.Id)-wishlist" class="btn btn-warning btn-add-wishlist">Add To WistList</button>
             </td>
         </tr>
     }
@@ -126,4 +127,5 @@
 @section scripts
 {
     <script src="~/Scripts/App/DeleteProduct.js"></script>
+    <script src="~/Scripts/App/AddToWishList.js"></script>
 }

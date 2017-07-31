@@ -45,3 +45,5 @@ textarea { max-width: 280px; }
 }
 
 .btn-search-type select { text-align: center !important;max-width: 50% !important}
+
+.wish-list-bar {display: none}

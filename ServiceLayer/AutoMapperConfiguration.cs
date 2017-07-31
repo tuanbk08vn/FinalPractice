@@ -13,6 +13,7 @@ namespace ServiceLayer
                 .ForMember(x => x.SubCategory, opt => opt.Ignore()).ReverseMap();
             Mapper.CreateMap<Category, CategoryDto>().ReverseMap();
             Mapper.CreateMap<SubCategory, SubCategoryDto>().ReverseMap();
+            Mapper.CreateMap<WishList, WishListDto>().ReverseMap();
 
         }
     }

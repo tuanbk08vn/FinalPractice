@@ -8,6 +8,7 @@ namespace DomainLayer.Models
 
         public string Name { get; set; }
 
+        [Index(IsUnique = true)]
         public string CodeSKU { get; set; }
 
         public int CategoryId { get; set; }

@@ -105,9 +105,12 @@ namespace Infracstructure.Repository
                 return null;
             }
         }
+
         public Product SelectOne(int id)
         {
             return _dbContext.Products.FirstOrDefault(m => m.Id == id);
         }
+
+        
     }
 }

@@ -119,21 +119,25 @@ namespace ServiceLayer.Service
                 switch (searchType)
                 {
                     case "Name":
-                        var resultWithName = _unitOfWork.Product.SearchProducts(x => x.Name.ToLower().Contains(lowerInput)).ToList();
+                        var resultWithName = _unitOfWork.Product
+                            .SearchProducts(x => x.Name.ToLower().Contains(lowerInput)).ToList();
                         result = Mapper.Map<List<ProductDto>>(resultWithName);
                         break;
                     case "CodeSKU":
-                        var resultWithCodeSKU = _unitOfWork.Product.SearchProducts(x => x.CodeSKU.ToLower().Contains(lowerInput)).ToList();
+                        var resultWithCodeSKU = _unitOfWork.Product
+                            .SearchProducts(x => x.CodeSKU.ToLower().Contains(lowerInput)).ToList();
                         result = Mapper.Map<List<ProductDto>>(resultWithCodeSKU);
                         break;
                     case "Category":
                         var categoryId = _unitOfWork.Category.GetByName(lowerInput);
-                        var resultWithCategory = _unitOfWork.Product.SearchProducts(x => x.CategoryId == categoryId).ToList();
+                        var resultWithCategory = _unitOfWork.Product.SearchProducts(x => x.CategoryId == categoryId)
+                            .ToList();
                         result = Mapper.Map<List<ProductDto>>(resultWithCategory);
                         break;
                     case "SubCategory":
                         var subCategoryId = _unitOfWork.SubCategory.GetByName(lowerInput);
-                        var resultWithSubCategory = _unitOfWork.Product.SearchProducts(x => x.SubCategoryId == subCategoryId).ToList();
+                        var resultWithSubCategory = _unitOfWork.Product
+                            .SearchProducts(x => x.SubCategoryId == subCategoryId).ToList();
                         result = Mapper.Map<List<ProductDto>>(resultWithSubCategory);
                         break;
                 }
@@ -167,5 +171,7 @@ namespace ServiceLayer.Service
                 return null;
             }
         }
+
+
     }
 }

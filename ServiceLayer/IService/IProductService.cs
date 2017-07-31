@@ -20,5 +20,7 @@ namespace ServiceLayer.IService
         ProductDto DetailsProduct(int id);
 
 
+
+
     }
 }

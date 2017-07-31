@@ -45,6 +45,7 @@
     <Compile Include="IRepository\IRepository.cs" />
     <Compile Include="IRepository\ISubCategoryRepository.cs" />
     <Compile Include="IRepository\IUserRepository.cs" />
+    <Compile Include="IRepository\IWishListRepository.cs" />
     <Compile Include="IUnitOfWork\IUnitOfWork.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Country.cs" />

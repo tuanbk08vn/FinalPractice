@@ -1,6 +1,6 @@
-﻿namespace DomainLayer.Models
+﻿namespace DTO
 {
-    public class WishList
+    public class WishListDto
     {
         public int Id { get; set; }
 
@@ -8,4 +8,5 @@
 
         public int ProductId { get; set; }
     }
+
 }

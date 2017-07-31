@@ -8,6 +8,7 @@ namespace DomainLayer.IUnitOfWork
         IUserRepository User { get; }
         ICategoryRepository Category { get; }
         ISubCategoryRepository SubCategory { get; }
+        IWishListRepository WishList { get; }
         void Complete();
         void Dispose(bool disposing);
         void Dispose();
